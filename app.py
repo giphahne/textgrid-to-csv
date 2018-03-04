@@ -100,7 +100,9 @@ def process_user(account):
         print("has more: ", has_more)
 
         if cursor is None:
+            print("cursor is 'None'!")
             result = dbx.files_list_folder(path='')
+            print("result: ", result)
         else:
             result = dbx.files_list_folder_continue(cursor)
 
