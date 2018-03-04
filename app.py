@@ -3,13 +3,12 @@ import hmac
 import json
 import os
 import threading
-import urlparse
+import urllib
 
 from dropbox import Dropbox, DropboxOAuth2Flow
 from dropbox.files import DeletedMetadata, FolderMetadata, WriteMode
-from flask import abort, Flask, redirect, render_template,
+from flask import abort, Flask, redirect, render_template
 from flask import Response, request, session, url_for
-from markdown import markdown
 import redis
 
 redis_url = os.environ['REDISTOGO_URL']
@@ -28,7 +27,7 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 def get_url(route):
     '''Generate a proper URL, forcing HTTPS if not running locally'''
-    host = urlparse.urlparse(request.url).hostname
+    host = urllib.parse.urlparse(request.url).hostname
     url = url_for(
         route,
         _external=True,
@@ -91,15 +90,13 @@ def process_user(account):
             result = dbx.files_list_folder_continue(cursor)
 
         for entry in result.entries:
-            # Ignore deleted files, folders, and non-markdown files
             if (isinstance(entry, DeletedMetadata)
                     or isinstance(entry, FolderMetadata)
                     or not entry.path_lower.endswith(file_extension)):
                 continue
 
-            # Convert to Markdown and store as <basename>.html
             _, resp = dbx.files_download(entry.path_lower)
-            html = markdown(unicode(resp.content, "utf-8")).encode("utf-8")
+            html = resp.content.decode()
             dbx.files_upload(
                 html,
                 entry.path_lower[:-len(file_extension)] + '.html',
