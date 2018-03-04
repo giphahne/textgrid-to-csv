@@ -1,7 +1,7 @@
 {
-  "name": "Dropbox Webhook Example",
+  "name": "Bubble Tracker Data",
   "logo": "https://mdwebhook.herokuapp.com/static/dropbox-logo.png",
-  "repository": "https://github.com/dropbox/mdwebhook",
+  "repository": "https://github.com/giphahne/bubble-tracker-data",
   "website": "https://www.dropbox.com/developers/webhooks/tutorial",
   "keywords": ["dropbox", "python", "flask"],
   "success_url": "/welcome",

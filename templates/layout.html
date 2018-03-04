@@ -1,13 +1,20 @@
 <!doctype html>
 <html>
-<head>
-    <title>Markdown Webhook</title>
+  <head>
+    <title>Bubble Tracker Data Webhook</title>
     <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-        <h1>Markdown Webhook</h1>
-        {% block body %}{% endblock %}
+      <h1>Markdown Webhook</h1>
+
+	  <p>
+		This app creates a folder in your Dropbox and then cleans
+		any bubble tracker data files you  place in that folder.
+	  </p>
+	  
+      <a class="button" href="login">Connect to Dropbox!</a>
+	  
     </div>
-</body>
+  </body>
 </html>
