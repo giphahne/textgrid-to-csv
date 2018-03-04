@@ -61,6 +61,8 @@ def oauth_callback():
     '''Callback function for when the user returns from OAuth.'''
     print("oauth_callback...")
     auth_result = get_flow().finish(request.args)
+    print("auth_result:")
+    print(auth_result)
     account = auth_result.account_id
     access_token = auth_result.access_token
 
