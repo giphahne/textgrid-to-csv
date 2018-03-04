@@ -165,7 +165,7 @@ def webhook():
 
     print("app_sec: ", app_sec)
 
-    if not hmac.compare_digest(signature, hmac.new(app_sec)):
+    if not hmac.compare_digest(signature, app_sec):
         abort(403)
 
     for account in json.loads(request.data)['list_folder']['accounts']:
