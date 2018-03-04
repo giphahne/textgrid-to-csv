@@ -160,7 +160,7 @@ def webhook():
     print("signature:", signature)
     if not hmac.compare_digest(signature,
                                hmac.new(APP_SECRET, request.data,
-                                        sha256).hexdigest()):
+                                        sha256).hexdigest().encode()):
         abort(403)
 
     for account in json.loads(request.data)['list_folder']['accounts']:
