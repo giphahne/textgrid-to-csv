@@ -155,12 +155,17 @@ def webhook():
 
     print("WEBHOOK...")
 
+    print("request.data: ", request.data)
     # Make sure this is a valid request from Dropbox
     signature = request.headers.get('X-Dropbox-Signature').encode("utf-8")
-    print("signature:", signature)
-    if not hmac.compare_digest(signature,
-                               hmac.new(APP_SECRET, request.data,
-                                        sha256).hexdigest().encode()):
+    print("signature: ", signature)
+
+    app_sec = hmac.new(APP_SECRET, request.data.encode(),
+                       sha256).hexdigest().encode()
+
+    print("app_sec: ", app_sec)
+
+    if not hmac.compare_digest(signature, hmac.new(app_sec)):
         abort(403)
 
     for account in json.loads(request.data)['list_folder']['accounts']:
