@@ -160,7 +160,8 @@ def webhook():
     signature = request.headers.get('X-Dropbox-Signature').encode("utf-8")
     print("signature: ", signature)
 
-    app_sec = hmac.new(APP_SECRET, request.data, sha256).hexdigest().encode()
+    app_sec = hmac.new(APP_SECRET.encode(), request.data,
+                       sha256).hexdigest().encode()
 
     print("app_sec: ", app_sec)
 
