@@ -157,6 +157,7 @@ def webhook():
 
     # Make sure this is a valid request from Dropbox
     signature = request.headers.get('X-Dropbox-Signature').encode("utf-8")
+    print("signature:", signature)
     if not hmac.compare_digest(signature,
                                hmac.new(APP_SECRET, request.data,
                                         sha256).hexdigest()):
