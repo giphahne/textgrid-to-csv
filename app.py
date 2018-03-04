@@ -28,6 +28,8 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 def get_url(route):
     '''Generate a proper URL, forcing HTTPS if not running locally'''
+    print("GET_URL...")
+
     host = urllib.parse.urlparse(request.url).hostname
     url = url_for(
         route,
@@ -45,6 +47,7 @@ def get_flow():
 
 @app.route('/welcome')
 def welcome():
+    print("WELCOME...")
     return render_template(
         'welcome.html',
         redirect_url=get_url('oauth_callback'),
@@ -73,7 +76,7 @@ def process_user(account):
     '''
     Call /files/list_folder for the given user ID and process any changes.
     '''
-
+    print("PROCESS_USER...")
     # OAuth token for the user
     token = redis_client.hget('tokens', account)
 
@@ -114,16 +117,19 @@ def process_user(account):
 
 @app.route('/')
 def index():
+    print("INDEX...")
     return render_template('index.html')
 
 
 @app.route('/login')
 def login():
+    print("LOG-IN...")
     return redirect(get_flow().start())
 
 
 @app.route('/done')
 def done():
+    print("DONE...")
     return render_template('done.html')
 
 
@@ -133,7 +139,7 @@ def challenge():
     Respond to the webhook challenge (GET request) 
     by echoing back the challenge parameter.
     '''
-
+    print("CHALLENGE...")
     resp = Response(request.args.get('challenge'))
     resp.headers['Content-Type'] = 'text/plain'
     resp.headers['X-Content-Type-Options'] = 'nosniff'
@@ -144,6 +150,8 @@ def challenge():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     '''Receive a list of changed user IDs from Dropbox and process each.'''
+
+    print("WEBHOOK...")
 
     # Make sure this is a valid request from Dropbox
     signature = request.headers.get('X-Dropbox-Signature').encode("utf-8")
