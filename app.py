@@ -38,6 +38,7 @@ def get_url(route):
 
 
 def get_flow():
+    print("GETTING FLOW...")
     return DropboxOAuth2Flow(APP_KEY, APP_SECRET, get_url('oauth_callback'),
                              session, 'dropbox-csrf-token')
 
@@ -55,7 +56,7 @@ def welcome():
 @app.route('/oauth_callback')
 def oauth_callback():
     '''Callback function for when the user returns from OAuth.'''
-
+    print("oauth_callback...")
     auth_result = get_flow().finish(request.args)
     account = auth_result.account_id
     access_token = auth_result.access_token
@@ -152,6 +153,7 @@ def webhook():
         abort(403)
 
     for account in json.loads(request.data)['list_folder']['accounts']:
+        print("ACCOUNT: {}".format(account))
         # We need to respond quickly to the webhook request, so we do the
         # actual work in a separate thread. For more robustness, it's a
         # good idea to add the work to a reliable queue and process the queue
