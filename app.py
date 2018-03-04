@@ -115,7 +115,7 @@ def process_user(account):
                 continue
 
             _, resp = dbx.files_download(entry.path_lower)
-            html = resp.content.decode()
+            html = resp.content
             dbx.files_upload(
                 html,
                 entry.path_lower[:-len(file_extension)] + '.html',
