@@ -104,9 +104,11 @@ def process_user(account):
             result = dbx.files_list_folder(path='')
             print("result: ", result)
         else:
-            result = dbx.files_list_folder_continue(cursor)
+            result = dbx.files_list_folder_continue(cursor.decode())
+            print("result: ", result)
 
         for entry in result.entries:
+            print("entry: ", entry)
             if (isinstance(entry, DeletedMetadata)
                     or isinstance(entry, FolderMetadata)
                     or not entry.path_lower.endswith(file_extension)):
@@ -117,7 +119,8 @@ def process_user(account):
             dbx.files_upload(
                 html,
                 entry.path_lower[:-len(file_extension)] + '.html',
-                mode=WriteMode('overwrite'))
+                mode=WriteMode('add'))
+            #mode=WriteMode('overwrite'))
 
         # Update cursor
         cursor = result.cursor
