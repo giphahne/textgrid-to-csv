@@ -61,10 +61,13 @@ def oauth_callback():
     '''Callback function for when the user returns from OAuth.'''
     print("oauth_callback...")
     auth_result = get_flow().finish(request.args)
-    print("auth_result:")
-    print(auth_result)
+    print("auth_result: ", auth_result)
+
     account = auth_result.account_id
     access_token = auth_result.access_token
+
+    print("account: ", account)
+    print("access_token: ", access_token)
 
     # Extract and store the access token for this user
     redis_client.hset('tokens', account, access_token)
@@ -81,9 +84,11 @@ def process_user(account):
     print("PROCESS_USER...")
     # OAuth token for the user
     token = redis_client.hget('tokens', account)
+    print("token: ", token)
 
     # cursor for the user (None the first time)
     cursor = redis_client.hget('cursors', account)
+    print("cursor: ", cursor)
 
     file_extension = ".csv"
 
@@ -91,6 +96,9 @@ def process_user(account):
     has_more = True
 
     while has_more:
+
+        print("has more: ", has_more)
+
         if cursor is None:
             result = dbx.files_list_folder(path='')
         else:
