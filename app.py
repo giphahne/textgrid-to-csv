@@ -92,7 +92,7 @@ def process_user(account):
 
     file_extension = ".csv"
 
-    dbx = Dropbox(token)
+    dbx = Dropbox(token.decode())
     has_more = True
 
     while has_more:
