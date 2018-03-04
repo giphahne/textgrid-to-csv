@@ -12,6 +12,7 @@ from flask import Response, request, session, url_for
 import redis
 
 redis_url = os.environ['REDISTOGO_URL']
+print("hello world! this is the redis url: {}".format(redis_url))
 redis_client = redis.from_url(redis_url)
 
 # App key and secret from the App console (dropbox.com/developers/apps)
