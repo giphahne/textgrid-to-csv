@@ -24,7 +24,7 @@ def clean_data(data):
     writer = csv.writer(output)
 
     n = 0
-    for row in yield_increasing_datapoints(data.readlines()):
+    for row in yield_increasing_datapoints(data.decode().readlines()):
         writer.writerow(row)
         n += 1
 
