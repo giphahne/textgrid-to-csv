@@ -11,6 +11,8 @@ from flask import abort, Flask, redirect, render_template
 from flask import Response, request, session, url_for
 import redis
 
+from data_cleaning_tools import clean_data
+
 redis_url = os.environ['REDISTOGO_URL']
 print("hello world! this is the redis url: {}".format(redis_url))
 redis_client = redis.from_url(redis_url)
@@ -90,7 +92,9 @@ def process_user(account):
     cursor = redis_client.hget('cursors', account)
     print("cursor: ", cursor)
 
-    file_extension = ".csv"
+    output_file_extension = ".csv"
+    input_file_extensions = [".bak", ".tsv"]
+    processed_marker = "_cleaned"
 
     dbx = Dropbox(token.decode())
     has_more = True
@@ -110,15 +114,19 @@ def process_user(account):
         for entry in result.entries:
             print("entry: ", entry)
             if (isinstance(entry, DeletedMetadata)
-                    or isinstance(entry, FolderMetadata)
-                    or not entry.path_lower.endswith(file_extension)):
+                    or isinstance(entry, FolderMetadata) or not any(
+                        entry.path_lower.endswith(processed_marker + e)
+                        for e in file_extensions)):
                 continue
 
             _, resp = dbx.files_download(entry.path_lower)
-            html = resp.content
+
+            processed_data = clean_data(resp.content)
+
             dbx.files_upload(
-                html,
-                entry.path_lower[:-len(file_extension)] + '.html',
+                processed_data,
+                entry.path_lower[:-4] + processed_marker +
+                output_file_extension,
                 mode=WriteMode('add'))
             #mode=WriteMode('overwrite'))
 
