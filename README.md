@@ -1,12 +1,12 @@
 # Bubble Tracker Data
 
-This simple example app uses webhooks to get notified of new Markdown files in Dropbox. It then converts all Markdown files it sees to HTML.
+This simple example app uses Dropbox webhooks to convert/clean data (amb: insert better description here)
 
 Read more about webhooks and this example on [the Dropbox developers site](https://www.dropbox.com/developers/webhooks/tutorial).
 
 ## Running the sample yourself
 
-You can also just set the required environment variables (using `.env_sample` as a guide) and run the app directly with `python app.py`.
+You can just set the required environment variables (using `.env_sample` as a guide) and run the app directly with `python app.py`.
 
 ## Deploy on Heroku
 
