@@ -113,10 +113,14 @@ def process_user(account):
 
         for entry in result.entries:
             print("entry: ", entry)
-            if (isinstance(entry, DeletedMetadata)
-                    or isinstance(entry, FolderMetadata) or not any(
-                        entry.path_lower.endswith(processed_marker + e)
-                        for e in input_file_extensions)):
+            # yapf: disable
+            if (
+                isinstance(entry, DeletedMetadata) or
+                isinstance(entry, FolderMetadata) or
+                not any(entry.path_lower.endswith(e)
+                        for e in input_file_extensions)
+            ):
+                # yapf: enable
                 print("skipping.")
                 continue
 
