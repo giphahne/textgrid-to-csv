@@ -116,7 +116,7 @@ def process_user(account):
             if (isinstance(entry, DeletedMetadata)
                     or isinstance(entry, FolderMetadata) or not any(
                         entry.path_lower.endswith(processed_marker + e)
-                        for e in file_extensions)):
+                        for e in input_file_extensions)):
                 continue
 
             _, resp = dbx.files_download(entry.path_lower)
