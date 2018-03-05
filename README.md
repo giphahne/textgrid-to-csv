@@ -21,7 +21,7 @@ Once you've deployed, you can easily clone the app and make modifications:
 ```
 $ heroku clone -a new-app-name
 ...
-$ vim index.js
+$ emacs index.js
 $ git add .
 $ git commit -m "update index.js"
 $ git push heroku master
