@@ -117,10 +117,12 @@ def process_user(account):
                     or isinstance(entry, FolderMetadata) or not any(
                         entry.path_lower.endswith(processed_marker + e)
                         for e in input_file_extensions)):
+                print("skipping.")
                 continue
 
             _, resp = dbx.files_download(entry.path_lower)
 
+            print("processing data...")
             processed_data = clean_data(resp.content)
 
             dbx.files_upload(
