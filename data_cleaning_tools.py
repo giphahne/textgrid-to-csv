@@ -25,7 +25,7 @@ def clean_data(data):
 
     n = 0
     for row in yield_increasing_datapoints(
-            StringIO.StringIO(data.decode()).readlines()):
+            io.StringIO(data.decode()).readlines()):
         writer.writerow(row)
         n += 1
 
