@@ -1,6 +1,6 @@
-# Bubble Tracker Data
+# TextGrid
 
-This simple example app uses Dropbox webhooks to convert/clean data (amb: insert better description here)
+This simple example app uses Dropbox webhooks to convert TextGrid files to CSV
 
 Read more about webhooks and this example on [the Dropbox developers site](https://www.dropbox.com/developers/webhooks/tutorial).
 
