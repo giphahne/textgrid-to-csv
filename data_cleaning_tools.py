@@ -19,7 +19,11 @@ def clean_data(data):
     tg = textgrid.TextGrid()
     #tg.read(f=input_file)
 
-    tg.read(f=io.BytesIO(data))
+    print("reading data into 'tempfile'...")
+    with open("tempfile", "wb") as f:
+        f.write(io.BytesIO(data).read())
+    print("done recording, now to tg...")
+    tg.read("tempfile")
 
     output = io.StringIO()
     writer = csv.writer(output)
