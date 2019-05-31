@@ -111,6 +111,7 @@ def process_user(account):
             result = dbx.files_list_folder(path='')
             print("result: ", result)
         else:
+            print("entering files_list_folder_continue...")
             result = dbx.files_list_folder_continue(cursor.decode())
             print("result: ", result)
 
