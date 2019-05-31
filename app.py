@@ -94,6 +94,7 @@ def process_user(account):
 
     output_file_extension = ".csv"
     input_file_extensions = [
+        ".textgrid",
         ".TextGrid",
     ]
     processed_marker = "_cleaned"
