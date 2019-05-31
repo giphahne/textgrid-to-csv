@@ -1,7 +1,7 @@
 {
-  "name": "Bubble Tracker Data",
+  "name": "Textgrid To CSV",
   "logo": "https://mdwebhook.herokuapp.com/static/dropbox-logo.png",
-  "repository": "https://github.com/giphahne/bubble-tracker-data",
+  "repository": "https://github.com/giphahne/textgrid-to-csv",
   "website": "https://www.dropbox.com/developers/webhooks/tutorial",
   "keywords": ["dropbox", "python", "flask"],
   "success_url": "/welcome",
