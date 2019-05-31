@@ -93,7 +93,9 @@ def process_user(account):
     print("cursor: ", cursor)
 
     output_file_extension = ".csv"
-    input_file_extensions = [".bak", ".tsv"]
+    input_file_extensions = [
+        ".TextGrid",
+    ]
     processed_marker = "_cleaned"
 
     dbx = Dropbox(token.decode())
