@@ -83,7 +83,7 @@ def process_user(account):
     '''
     Call /files/list_folder for the given user ID and process any changes.
     '''
-    print("PROCESS_USER...")
+    print("*" * 30, " - PROCESS_USER - ", "*" * 30)
     # OAuth token for the user
     token = redis_client.hget('tokens', account)
     print("token: ", token)
@@ -103,9 +103,7 @@ def process_user(account):
     has_more = True
 
     while has_more:
-
-        print("has more: ", has_more)
-
+        print("there's more!")
         if cursor is None:
             print("cursor is 'None'!")
             result = dbx.files_list_folder(path='')
