@@ -26,8 +26,9 @@ def clean_data(data):
         size = f.tell()
         print("done recording, now to tg...(read {} bytes)".format(size))
         f.seek(0, 0)
-        tg.read(f=f)
+    tg.read(f="tempfile")
 
+    print("tiers in textgrid: {}".format(tg.getNames()))
     output = io.StringIO()
     writer = csv.writer(output)
 
