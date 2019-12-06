@@ -41,7 +41,7 @@ def clean_data(data):
     row_iters = list(map(filter_func, (tg.getFirst(n) for n in names)))
     rows = zip(*row_iters)
 
-    names = ("minTime", "maxTime") + names
+    names = ["minTime", "maxTime"] + names
 
     writer.writerow(names)
 
