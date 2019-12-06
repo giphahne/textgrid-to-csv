@@ -22,7 +22,9 @@ def clean_data(data):
     print("reading data into 'tempfile'...")
     with open("tempfile", "wb") as f:
         f.write(io.BytesIO(data).read())
-    print("done recording, now to tg...")
+        f.seek(0, 2)
+        size = f.tell()
+    print("done recording, now to tg...(read {} bytes)".format(size))
     tg.read("tempfile")
 
     output = io.StringIO()
